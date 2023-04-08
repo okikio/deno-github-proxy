@@ -1,4 +1,4 @@
-import { hasTransferables } from "http://localhost:8000/okikio/transferables/main/src/index.ts";
+import { hasTransferables } from "https://brave-parrot-49.deno.dev/okikio/transferables/main/src/index.ts";
 
 console.log({
   hasTransferables
