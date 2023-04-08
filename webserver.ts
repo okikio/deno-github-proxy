@@ -9,7 +9,7 @@ serve(async (req: Request) => {
   const res = await fetch(url);
 
   const headers = Object.fromEntries([...res.headers]);
-  const typescriptTypes = new URL(DENO_TYPE_PATH + url.pathname, "https://brave-parrot-49.deno.dev");
+  const typescriptTypes = new URL(DENO_TYPE_PATH + url.pathname, "https://github-ts.deno.dev");
   const finalHeaders = {
     ...headers,
     ...Object.fromEntries([
