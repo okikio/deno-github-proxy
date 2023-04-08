@@ -1,29 +1,28 @@
-// Start listening on port 8080 of localhost.
-const server = Deno.listen({ port: 8080 });
-console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
+import { serve } from "https://deno.land/std@0.182.0/http/server.ts";
 
-// Connections to the server will be yielded up as an async iterable.
-for await (const conn of server) {
-  // In order to not be blocking, we need to handle each connection individually
-  // in its own async function.
-  (async () => {
-    // This "upgrades" a network connection into an HTTP connection.
-    const httpConn = Deno.serveHttp(conn);
-    // Each request sent over the HTTP connection will be yielded as an async
-    // iterator from the HTTP connection.
-    for await (const requestEvent of httpConn) {
-      // The native HTTP server uses the web standard `Request` and `Response`
-      // objects.
-      const body = `Your user-agent is:\n\n${requestEvent.request.headers.get(
-        "user-agent",
-      ) ?? "Unknown"}`;
-      // The requestEvent's `.respondWith()` method is how we send the response
-      // back to the client.
-      requestEvent.respondWith(
-        new Response(body, {
-          status: 200,
-        }),
-      );
-    }
-  })();
-}
+const DENO_TYPE_PATH = "/@deno-types"
+
+serve(async (req: Request) => {
+  let { pathname } = new URL(req.url);
+
+  const url = new URL(pathname.replace(DENO_TYPE_PATH, ""), `https://raw.githubusercontent.com`);
+  const res = await fetch(url);
+
+  const headers = Object.fromEntries([...res.headers]);
+  const typescriptTypes = new URL(DENO_TYPE_PATH + url.pathname, "https://8000-gitpodsampl-templatetyp-gxqkxjx6j7m.ws-us93.gitpod.io");
+  const finalHeaders = {
+    ...headers,
+    ...Object.fromEntries([
+      ["content-type", "text/typescript"], // pathname.startsWith(DENO_TYPE_PATH) ? "application/typescript" : 
+      ['accept-ranges', 'bytes'],
+      ['access-control-allow-origin', '*'],
+      ['cache-control', 'max-age=30, public'],
+      ...(!pathname.startsWith(DENO_TYPE_PATH) ? [['x-typescript-types', typescriptTypes.toString()]] : [])
+    ])
+  };
+
+  return new Response(await res.arrayBuffer(), {
+    headers: finalHeaders,
+    status: 200,
+  });
+});
