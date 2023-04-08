@@ -1,5 +1,5 @@
-import db from 'https://8000-gitpodsampl-templatetyp-gxqkxjx6j7m.ws-us93.gitpod.io/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
-import type * as neo4j from 'https://8000-gitpodsampl-templatetyp-gxqkxjx6j7m.ws-us93.gitpod.io/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
+import db from 'http://localhost:8000/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
+import type * as neo4j from 'http://localhost:8000/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
 
 /**
  * Create a new driver instance to connect to Neo4j
