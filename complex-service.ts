@@ -1,4 +1,4 @@
-import * as neo4j from 'https://github-ts.deno.dev/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
+import * as neo4j from 'https://github-ts.okikio.workers.dev/neo4j/neo4j-javascript-driver/5.0/packages/neo4j-driver-deno/lib/mod.ts';
 
 /**
  * Create a new driver instance to connect to Neo4j
