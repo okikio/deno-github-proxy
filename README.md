@@ -23,4 +23,4 @@ const driver: neo4j.Driver = neo4j.driver(
 export default driver;
 ```
 
-^ You can also use this to fetch Javascript but you'll need to load js with the `/?js` search query https://github-ts.okikio.workers.dev/okikio/transferables/main/lib/index.mjs?js
+> ^ You can also use this to fetch Javascript files but you'll need to add the `/?js` search query like so, https://github-ts.okikio.workers.dev/okikio/transferables/main/lib/index.mjs?js
